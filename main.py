@@ -19,6 +19,7 @@ from random import choice, randrange
 from cfonts import render, say
 from colorama import Fore, Style, init
 import webbrowser
+from flask import Flask
 
 
 INSTAGRAM_RECOVERY_URL = 'https://i.instagram.com/api/v1/accounts/send_recovery_flow_email/'
@@ -41,7 +42,7 @@ CONTENT_TYPE_FORM = 'application/x-www-form-urlencoded; charset=UTF-8'
 CONTENTTYPE_FORM_ALT = 'application/x-www-form-urlencoded;charset=UTF-8'
 
 TOKEN_FILE = 'tl.txt'
-zrykr_domain = '@gmail.com' 
+    zrykr_domain = '@gmail.com' 
 
 
 E = '\033[1;31m'
@@ -359,7 +360,15 @@ def zrykr_python():
                     check(email)
         except Exception:
             pass
+app = Flask(__name__)
 
+@app.route("/")
+def home():
+    return "Hello from Railway!"
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 
 def stats_loop():
     while True:
